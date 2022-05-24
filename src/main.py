@@ -79,14 +79,17 @@ def main():
 
   print("--------------------machine learning---------------------")
 
-  for num in range(len(fake_data)):
-    test_df = real_box.pop(0)
+  for num in range(len(fake_data)-1):
+    test_df = real_box[num+1]
+    train_real = real_box[0]
+    for i in range(num):
+      train_real = pd.concat([train_real,real_box[num]])
 
     for i in range(WorkNum):
       print(num+1,"分割目")
       print(i+1,"回目")
-
-      fake_loss,real_loss = lstm_models.lstm(num,fake_data[num],test_df,real_box)
+      
+      fake_loss,real_loss = lstm_models.lstm(num,fake_data[num],test_df,train_real)
 
       loss_fake.append(fake_loss[0])
       MAE_fake.append(fake_loss[1])
