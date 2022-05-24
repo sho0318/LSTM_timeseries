@@ -79,7 +79,7 @@ def main():
 
   print("--------------------machine learning---------------------")
 
-  for num in range(len(fake_data)-1):
+  for num in range(len(fake_data)):
     test_df = real_box[num+1]
     train_real = real_box[0]
     for i in range(num):
