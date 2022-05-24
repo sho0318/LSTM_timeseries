@@ -51,13 +51,12 @@ class DataHundle():
 
     def read_data(self,use_data):
         data_box = []
-        start_day = (use_data-1)*7
         for i in range(self.DataNum):
             data_name = "data" + str(i)
             name = '../data/'+ self.DataDirectory + "/no_" + str(use_data) + '/' + data_name + ".csv"
             data = pd.read_csv(name, parse_dates=['que_time'])
             data = self.day_devied(data)
-            data = data.drop(range(start_day,start_day+7))
+            data = data[0:use_data*24*7]
             data = data.reset_index(drop=True)
             data_box.append(data)
         return data_box

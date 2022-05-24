@@ -61,7 +61,7 @@ def main():
 
   real_box = real_datahundle.change_realdata()
 
-  for use_data in range(BoxLength):
+  for use_data in range(BoxLength-1):
     fake_data.append(datahundle.read_data(use_data+1))
   
   print("--------------------make models---------------------")
@@ -81,9 +81,13 @@ def main():
 
   for num in range(len(fake_data)):
     test_df = real_box[num+1]
-    train_real = real_box[0]
+    train_real = []
     for i in range(num):
-      train_real = pd.concat([train_real,real_box[num]])
+      train_real.append(real_box[i])
+    if len(train_real) == 0:
+      train_real.append(real_box[0])
+    
+    print(fake_data[num])
 
     for i in range(WorkNum):
       print(num+1,"分割目")
