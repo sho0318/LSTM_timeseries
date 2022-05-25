@@ -82,10 +82,8 @@ def main():
   for num in range(len(fake_data)):
     test_df = real_box[num+1]
     train_real = []
-    for i in range(num):
+    for i in range(num+1):
       train_real.append(real_box[i])
-    if len(train_real) == 0:
-      train_real.append(real_box[0])
     
     print(fake_data[num])
 
@@ -107,7 +105,7 @@ def main():
 
     real_box.append(test_df)
 
-    message =str(num+1) + "分割目終了\n" + "fake\n" + str(array[0]) + "\n" + str(array[1]) + "\nreal\n" + str(array[2]) + "\n" + str(array[3])
+    message = "timeseries\n" + str(num+1) + "分割目終了\n" + "fake\n" + str(array[0]) + "\n" + str(array[1]) + "\nreal\n" + str(array[2]) + "\n" + str(array[3])
     Line_bot.send(message)
   
   result = Result(loss_fake,MAE_fake,loss_real,MAE_real,BoxLength,WorkNum)
